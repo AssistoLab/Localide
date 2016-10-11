@@ -74,7 +74,7 @@ public final class Localide {
             return
         }
 
-        self.discoverUserPreferenceOfMapApps("Navigation", message: "Which app would you like to use for directions?", apps: appChoices) { app in
+        self.discoverUserPreferenceOfMapApps(NSLocalizedString("directions", comment: ""), message: nil, apps: appChoices) { app in
             if remember {
                 UserDefaults.setPreferredMapApp(app, fromMapAppChoices: appChoices)
             }
@@ -97,7 +97,7 @@ extension Localide {
         completion?(app, fromMemory, didLaunchMapApp)
     }
 
-    fileprivate func discoverUserPreferenceOfMapApps(_ title: String, message: String, apps: [LocalideMapApp], completion: @escaping (LocalideMapApp) -> Void) {
+    fileprivate func discoverUserPreferenceOfMapApps(_ title: String?, message: String?, apps: [LocalideMapApp], completion: @escaping (LocalideMapApp) -> Void) {
         guard apps.count > 1 else {
             if let app = apps.first {
                 completion(app)
@@ -113,7 +113,7 @@ extension Localide {
             alertController.addAction(alertAction)
         }
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.cancel, handler: nil)
         alertController.addAction(cancelAction)
 
         UIApplication.topViewController()?.present(alertController, animated: true, completion: nil)
